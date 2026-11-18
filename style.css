@@ -1,0 +1,198 @@
+:root {
+  --paper: #e6dfc8;
+  --paper-dark: #d6cdb0;
+  --ink: #25407f;
+  --gold: #ebb63c;
+  --red: #c9382a;
+  --sepia: #4a3828;
+  --display: "Federo", "Trebuchet MS", sans-serif;
+  --body: "Libre Caslon Text", Georgia, serif;
+  --script: "Pinyon Script", "Brush Script MT", cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image: radial-gradient(rgba(74,56,40,.06) 1px, transparent 1px);
+  background-size: 5px 5px;
+  color: var(--sepia);
+  font-family: var(--body);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--ink); line-height: 1.15; margin: 0 0 .5em; }
+h2 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 1.4em; }
+h3 { font-size: 1.4rem; }
+.script { font-family: var(--script); color: var(--red); font-size: 1.25em; margin-right: .2em; }
+
+/* Top bar */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  padding: .7rem 1.5rem;
+  background: var(--ink); color: var(--paper);
+  border-bottom: 4px double var(--gold);
+}
+.brand { font-family: var(--display); font-size: 1.4rem; text-decoration: none; }
+nav { display: flex; gap: 1.4rem; }
+nav a { text-decoration: none; font-size: .95rem; padding: .2rem 0; border-bottom: 2px solid transparent; }
+nav a:hover, nav a.active { border-color: var(--gold); }
+.menu-btn { display: none; background: none; color: inherit; border: 1.5px solid var(--gold); padding: .3rem .8rem; font: inherit; cursor: pointer; }
+
+/* Hero poster */
+.hero { padding: 3rem 1rem 4rem; display: flex; justify-content: center; }
+.poster {
+  width: min(680px, 100%);
+  text-align: center;
+  padding: 2rem 1.5rem 2.5rem;
+  border: 3px solid var(--ink);
+  outline: 3px solid var(--ink);
+  outline-offset: 6px;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.poster-top { font-family: var(--display); color: var(--ink); font-size: 1.1rem; margin: 0; letter-spacing: .06em; }
+.poster-title {
+  font-size: clamp(3.2rem, 11vw, 6rem);
+  transform: rotate(-4deg);
+  margin: 1.2rem 0 2.2rem;
+  text-shadow: 3px 3px 0 var(--gold);
+}
+.sun {
+  position: relative; z-index: 1;
+  width: min(320px, 72%); aspect-ratio: 1;
+  margin: 0 auto 2rem;
+  border-radius: 50%;
+  background: var(--gold);
+  display: grid; place-items: center;
+}
+.sun::before { /* rays */
+  content: ""; position: absolute; inset: -45%; z-index: -2; border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, var(--ink) 0 .7deg, transparent .7deg 12deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 34%, #000 36%, transparent 70%);
+          mask-image: radial-gradient(circle, transparent 34%, #000 36%, transparent 70%);
+  opacity: .55;
+  animation: spin 120s linear infinite;
+}
+.sun::after { /* beaded ring */
+  content: ""; position: absolute; inset: -12px; border-radius: 50%;
+  border: 8px dotted var(--ink); z-index: -1;
+}
+.sun-text { font-family: var(--display); color: var(--ink); font-size: clamp(1.3rem, 4vw, 1.8rem); line-height: 1.3; margin: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.plaque {
+  background: var(--ink); color: var(--gold);
+  padding: 1rem 1.2rem; margin: 0 -1.5rem 1.8rem;
+  border-block: 3px double var(--gold);
+  font-family: var(--display); font-size: 1.15rem;
+  display: flex; flex-direction: column; gap: .2rem;
+}
+.plaque strong { font-weight: 400; color: var(--paper); font-size: 1.5rem; }
+
+.hero-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; cursor: pointer;
+  font-family: var(--display); font-size: 1.1rem; text-decoration: none;
+  padding: .6rem 1.4rem; border: 2px solid var(--red);
+  background: var(--red); color: var(--paper);
+  transition: background .2s, color .2s;
+}
+.btn:hover { background: transparent; color: var(--red); }
+.btn-ghost { background: transparent; color: var(--red); }
+.btn-ghost:hover { background: var(--red); color: var(--paper); }
+.btn-gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.btn-gold:hover { background: transparent; color: var(--gold); }
+
+/* Sections */
+.section { width: min(940px, 100% - 2rem); margin: 0 auto; padding: 4rem 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+.two-col p { margin: 0; }
+
+/* Ticket cards */
+.ticket {
+  display: grid; grid-template-columns: 120px 1fr;
+  border: 2px solid var(--ink); background: rgba(255,255,255,.28);
+  margin-bottom: 1.6rem;
+}
+.stub {
+  display: grid; place-items: center; text-align: center;
+  background: var(--ink); color: var(--gold);
+  font-family: var(--display); font-size: 1.4rem; padding: 1rem;
+  border-right: 3px dashed var(--gold);
+}
+.ticket-body { padding: 1.4rem 1.6rem; }
+.ticket-body p { margin: .2rem 0; }
+.ticket ul { padding-left: 1.2rem; margin: .8rem 0; }
+.meta { color: var(--red); font-style: italic; }
+.fare { font-family: var(--display); color: var(--ink); font-size: 1.2rem; }
+.link { font-family: var(--display); color: var(--red); text-underline-offset: 4px; }
+.link:hover { color: var(--ink); }
+
+/* Project cards: sepia lithograph feel */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.6rem; }
+.card {
+  padding: 1.6rem;
+  background: linear-gradient(180deg, #cdb99a 0%, #e4d6bb 100%);
+  border: 2px solid var(--sepia);
+  box-shadow: 6px 6px 0 var(--sepia);
+  display: flex; flex-direction: column;
+}
+.card h3 { color: var(--red); font-size: 1.8rem; }
+.card p { margin: 0 0 .8rem; font-size: .95rem; }
+.card .tags { font-style: italic; color: var(--sepia); border-bottom: 1px solid var(--sepia); padding-bottom: .6rem; }
+.card .link { margin-top: auto; }
+
+/* Timeline */
+.timeline { border-left: 3px double var(--ink); padding-left: 1.8rem; display: grid; gap: 2rem; }
+.entry { position: relative; }
+.entry::before {
+  content: ""; position: absolute; left: calc(-1.8rem - 9px); top: .45rem;
+  width: 15px; height: 15px; border-radius: 50%; background: var(--gold); border: 3px solid var(--ink);
+}
+.entry p { margin: .2rem 0; }
+
+/* Fare list skills */
+.fares { margin: 0; display: grid; gap: 1rem; }
+.fares div { display: flex; align-items: baseline; gap: .6rem; }
+.fares dt { font-family: var(--display); color: var(--ink); font-size: 1.3rem; white-space: nowrap; }
+.fares div::before { content: ""; order: 1; flex: 1; border-bottom: 2px dotted var(--sepia); min-width: 1rem; }
+.fares dd { margin: 0; order: 2; max-width: 55%; text-align: right; }
+
+/* Contact */
+.contact { padding: 2rem 1rem 5rem; display: flex; justify-content: center; }
+.plaque.big { width: min(760px, 100%); margin: 0; padding: 3rem 2rem; text-align: center; align-items: center; border: 3px double var(--gold); }
+.plaque.big h2 { color: var(--gold); margin-bottom: .4em; }
+.plaque.big p { color: var(--paper); font-family: var(--body); font-size: 1rem; max-width: 52ch; margin: 0 0 1.5rem; }
+.contact-links { display: flex; gap: 1.4rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+.contact-links a { color: var(--paper); font-size: 1.1rem; text-underline-offset: 5px; }
+.contact-links a:hover { color: var(--gold); }
+.toast { min-height: 1.5em; margin: 1rem 0 0 !important; color: var(--gold) !important; }
+
+footer { text-align: center; padding: 1.5rem; border-top: 4px double var(--ink); font-size: .9rem; }
+footer p { margin: 0; }
+
+/* Mobile */
+@media (max-width: 720px) {
+  .menu-btn { display: block; }
+  nav { display: none; flex-direction: column; width: 100%; gap: .6rem; padding-top: .8rem; }
+  nav.open { display: flex; }
+  .two-col { grid-template-columns: 1fr; }
+  .ticket { grid-template-columns: 1fr; }
+  .stub { border-right: 0; border-bottom: 3px dashed var(--gold); padding: .6rem; }
+  .fares div { flex-direction: column; gap: 0; }
+  .fares div::before { display: none; }
+  .fares dd { text-align: left; max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sun::before { animation: none; }
+  .btn { transition: none; }
+}
